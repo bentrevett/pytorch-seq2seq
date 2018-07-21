@@ -105,4 +105,5 @@ venv.bak/
 
 #data
 .data/
+.save/
 .vector_cache/
