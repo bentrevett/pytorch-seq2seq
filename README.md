@@ -23,11 +23,11 @@ python -m spacy download de
 
 ## Tutorials
 
-* 1 - [Sequence to Sequence Learning with Neural Networks]() **IN PROGRESS**
+* 1 - [Sequence to Sequence Learning with Neural Networks](https://github.com/bentrevett/pytorch-seq2seq/blob/master/1%20-%20Sequence%20to%20Sequence%20Learning%20with%20Neural%20Networks.ipynb) **IN PROGRESS**
 
     Implementation of [Sequence to Sequence Learning with Neural Networks](https://arxiv.org/abs/1409.3215)
 
-* 2 - [Learning Phrase Representations using RNN Encoder-Decoder for Statistical Machine Translation] **IN PROGRESS**
+* 2 - [Learning Phrase Representations using RNN Encoder-Decoder for Statistical Machine Translation](https://github.com/bentrevett/pytorch-seq2seq/blob/master/2%20-%20Learning%20Phrase%20Representations%20using%20RNN%20Encoder-Decoder%20for%20Statistical%20Machine%20Translation.ipynb) **IN PROGRESS**
 
     Implementation of [Learning Phrase Representations using RNN Encoder-Decoder for Statistical Machine Translation](https://arxiv.org/abs/1406.1078)
 
