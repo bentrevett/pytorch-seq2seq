@@ -57,3 +57,4 @@ Here are some things I looked at while making these tutorials. Some of it may be
 - https://github.com/pytorch/fairseq
 - https://github.com/jadore801120/attention-is-all-you-need-pytorch
 - http://nlp.seas.harvard.edu/2018/04/03/attention.html
+- https://www.analyticsvidhya.com/blog/2019/06/understanding-transformers-nlp-state-of-the-art-models/
