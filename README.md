@@ -6,6 +6,12 @@ This repo contains tutorials covering understanding and implementing sequence-to
 
 ## Getting Started
 
+### With docker: 
+```bash
+docker-compose up
+```
+
+### Without docker: 
 To install PyTorch, see installation instructions on the [PyTorch website](pytorch.org).
 
 To install TorchText:

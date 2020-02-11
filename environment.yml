@@ -1,0 +1,10 @@
+name: torch-seq2seq
+channels:
+- defaults
+- pytorch
+dependencies:
+- python=3.6
+- jupyterlab
+- pytorch
+- cpuonly
+- torchtext
