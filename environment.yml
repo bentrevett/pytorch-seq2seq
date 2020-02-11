@@ -2,9 +2,12 @@ name: torch-seq2seq
 channels:
 - defaults
 - pytorch
+- powerai
 dependencies:
 - python=3.6
 - jupyterlab
+- spacy
 - pytorch
 - cpuonly
 - torchtext
+- sentencepiece
