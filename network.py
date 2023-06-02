@@ -2,10 +2,6 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 
-from torchtext.legacy.datasets import Multi30k
-from torchtext.legacy.data import Field, BucketIterator
-
-import spacy
 import numpy as np
 
 import random
@@ -21,7 +17,7 @@ class Encoder(nn.Module):
         
         self.embedding = nn.Embedding(input_dim, emb_dim)
         
-        self.rnn = nn.LSTM(emb_dim, hid_dim, n_layers, dropout = dropout)
+        self.rnn = nn.RNN(emb_dim, hid_dim, n_layers, dropout = dropout)
         
         self.dropout = nn.Dropout(dropout)
         
@@ -33,7 +29,7 @@ class Encoder(nn.Module):
         
         #embedded = [src len, batch size, emb dim]
         
-        outputs, (hidden, cell) = self.rnn(embedded)
+        outputs, hidden = self.rnn(embedded)
         
         #outputs = [src len, batch size, hid dim * n directions]
         #hidden = [n layers * n directions, batch size, hid dim]
@@ -41,7 +37,7 @@ class Encoder(nn.Module):
         
         #outputs are always from the top hidden layer
         
-        return hidden, cell
+        return hidden
     
 
 class Decoder(nn.Module):
@@ -54,13 +50,13 @@ class Decoder(nn.Module):
         
         self.embedding = nn.Embedding(output_dim, emb_dim)
         
-        self.rnn = nn.LSTM(emb_dim, hid_dim, n_layers, dropout = dropout)
+        self.rnn = nn.RNN(emb_dim, hid_dim, n_layers, dropout = dropout)
         
         self.fc_out = nn.Linear(hid_dim, output_dim)
         
         self.dropout = nn.Dropout(dropout)
         
-    def forward(self, input, hidden, cell):
+    def forward(self, input, hidden):
         
         #input = [batch size]
         #hidden = [n layers * n directions, batch size, hid dim]
@@ -78,7 +74,7 @@ class Decoder(nn.Module):
         
         #embedded = [1, batch size, emb dim]
                 
-        output, (hidden, cell) = self.rnn(embedded, (hidden, cell))
+        output, hidden = self.rnn(embedded, hidden)
         
         #output = [seq len, batch size, hid dim * n directions]
         #hidden = [n layers * n directions, batch size, hid dim]
@@ -93,7 +89,7 @@ class Decoder(nn.Module):
         
         #prediction = [batch size, output dim]
         
-        return prediction, hidden, cell
+        return prediction, hidden
     
 
 class Seq2Seq(nn.Module):
@@ -124,7 +120,7 @@ class Seq2Seq(nn.Module):
         outputs = torch.zeros(trg_len, batch_size, trg_vocab_size).to(self.device)
         
         #last hidden state of the encoder is used as the initial hidden state of the decoder
-        hidden, cell = self.encoder(src)
+        hidden = self.encoder(src)
         
         #first input to the decoder is the <sos> tokens
         input = trg[0,:]
@@ -133,7 +129,7 @@ class Seq2Seq(nn.Module):
             
             #insert input token embedding, previous hidden and previous cell states
             #receive output tensor (predictions) and new hidden and cell states
-            output, hidden, cell = self.decoder(input, hidden, cell)
+            output, hidden = self.decoder(input, hidden)
             
             #place predictions in a tensor holding predictions for each token
             outputs[t] = output
