@@ -1,0 +1,8 @@
+torch
+numpy
+spacy
+datasets
+torchtext
+tqdm
+matplotlib
+evaluate

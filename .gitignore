@@ -105,8 +105,6 @@ venv.bak/
 
 #data
 *.pt
-.data/
-data/
 models/
 .vector_cache/
 
